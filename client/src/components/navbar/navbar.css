@@ -1,27 +1,87 @@
-.navbar{
+
+.navbar {
   height: 50px;
   background-color: #003580;
   display: flex;
   justify-content: center;
+  position: sticky; 
+  top: 0;
+  z-index: 1000; 
+  transition: background-color 0.3s ease; 
 }
 
-.navContainer{
+.navContainer {
   width: 100%;
   max-width: 1024px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
 }
 
-.logo{
+.logo {
   font-weight: 500;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.navButton{
+.logo:hover {
+  color: #ffdd00;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+}
+
+.navUsername {
+  margin-right: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.navButton {
   margin-left: 20px;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
   color: #003580;
+  background-color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: #003580;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .navItems {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .navButton {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+
+.navbar.scrolled {
+  background-color: #001f3d; 
 }

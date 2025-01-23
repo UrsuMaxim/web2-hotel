@@ -36,9 +36,11 @@ const Header = ({ type }) => {
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
+      const newValue =
+        operation === "i" ? prev[name] + 1 : prev[name] - 1;
       return {
         ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+        [name]: Math.max(newValue, 1), // ensures that the value does not go below 1
       };
     });
   };
@@ -46,6 +48,10 @@ const Header = ({ type }) => {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
+    if (!destination || !dates.length) {
+      alert("Please complete all fields before searching.");
+      return;
+    }
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
@@ -53,9 +59,7 @@ const Header = ({ type }) => {
   return (
     <div className="header">
       <div
-        className={
-          type === "list" ? "headerContainer listMode" : "headerContainer"
-        }
+        className={type === "list" ? "headerContainer listMode" : "headerContainer"}
       >
         <div className="headerList">
           <div className="headerListItem active">
@@ -178,7 +182,11 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn" onClick={handleSearch}>
+                <button
+                  className="headerBtn"
+                  onClick={handleSearch}
+                  disabled={!destination || !dates.length}
+                >
                   Search
                 </button>
               </div>

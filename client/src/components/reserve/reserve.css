@@ -76,3 +76,21 @@
   width: 100%;
   margin-top: 20px;
 }
+
+/* Camerele indisponibile */
+.room.unavailable label {
+  color: gray;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.room.unavailable input {
+  pointer-events: none; /* Dezactivează complet interacțiunea */
+  opacity: 0.6; /* Reduce opacitatea pentru a indica indisponibilitatea */
+}
+.room input:disabled + label {
+  color: gray;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+

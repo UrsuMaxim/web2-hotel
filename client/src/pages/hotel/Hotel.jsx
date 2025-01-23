@@ -58,17 +58,24 @@ const Hotel = () => {
 
   const handleClick = () => {
     if (user) {
+      console.log("User authenticated, opening reserve modal."); // Debug log
       setOpenModal(true);
     } else {
+      console.log("User not authenticated, redirecting to login."); // Debug log
       navigate("/login");
     }
   };
+
+  console.log("Hotel data:", data); // Debug log for fetched data
+
   return (
     <div>
       <Navbar />
       <Header type="list" />
       {loading ? (
-        "loading"
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error loading hotel data. Please try again later.</div>
       ) : (
         <div className="hotelContainer">
           {open && (
@@ -98,7 +105,6 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -129,14 +135,12 @@ const Hotel = () => {
                 <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a {days}-night stay!</h1>
+                <h1>Perfect for a relaxing stay!</h1>
                 <span>
-                  Located in the real heart of Krakow, this property has an
-                  excellent location score of 9.8!
+                  Enjoy comfort and excellent services in a prime location!
                 </span>
                 <h2>
-                  <b>${days * data.cheapestPrice * options.room}</b> ({days}{" "}
-                  nights)
+                  <b>${data.cheapestPrice * options.room}</b> ({days+1} nights)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
